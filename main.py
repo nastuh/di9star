@@ -37,12 +37,12 @@ user_data = defaultdict(lambda: {
 # Клавиатура основного меню
 main_keyboard = ReplyKeyboardMarkup(
     [
-        ["👤 Профиль", "🌐 Соцсети"],
-        ["📂 Проекты", "🍦 Счетчик мороженого"],
-        ["📋 Команды", "🎁 Коллекция"]
+        ["👤 Profile", "🌐 Social Media"],
+        ["📂 Projects", "🍦 Ice cream counter"],
+        ["📋 Commands", "🎁 Collection"]
     ],
     resize_keyboard=True,
-    input_field_placeholder="Выберите действие..."
+    input_field_placeholder="Choose an action..."
 )
 
 # Все возможные вкусы мороженого
@@ -70,10 +70,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Обработка команды /start."""
     user = update.message.from_user
     await update.message.reply_text(
-        f"🌟 Привет, {user.first_name}!\n"
-        "Я - бот-портфолио с коллекцией мороженого!\n"
-        "Каждые 3 часа ты можешь получить случайный вкус мороженого.\n"
-        "Попробуй собрать их все!",
+        f"🌟 Hi, {user.first_name}!\n"
+        "Glad to see you here!\n"
+        "I'm ready to show you my sjills and achievments.\n"
+        "Every 3 hours you can get a random taste of ice cream.\n"
+        "Try to collect them all!",
         reply_markup=main_keyboard
     )
     
@@ -98,8 +99,8 @@ async def check_ice_cream_drop(update: Update, context: ContextTypes.DEFAULT_TYP
             hours = wait_time.seconds // 3600
             minutes = (wait_time.seconds % 3600) // 60
             await update.message.reply_text(
-                f"⏳ Следующее мороженое можно будет получить через {hours}ч {minutes}мин\n"
-                f"⌛ Последнее было: {last_drop.strftime('%H:%M %d.%m.%Y')}"
+                f"⏳ The next ice cream can be abtained in {hours}h {minutes}min\n"
+                f"⌛ The last one was: {last_drop.strftime('%H:%M %d.%m.%Y')}"
             )
 
 async def drop_random_flavor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -130,18 +131,18 @@ async def drop_random_flavor(update: Update, context: ContextTypes.DEFAULT_TYPE)
     
     # Определяем сообщение в зависимости от редкости
     rarity_messages = {
-        "common": "Неплохо!",
-        "uncommon": "Хороший улов!",
-        "rare": "Великолепно!",
-        "legendary": "Невероятно!!!"
+        "common": "Not bad!",
+        "uncommon": "Good catch!",
+        "rare": "Magnificently!",
+        "legendary": "Unbelievably!!!"
     }
     
     # Отправляем сообщение
     await update.message.reply_text(
-        f"🎉 {rarity_messages[chosen_rarity]} Ты получил:\n"
-        f"{flavor_data['emoji']} <b>{chosen_flavor.capitalize()}</b> мороженое!\n"
-        f"Редкость: {chosen_rarity.capitalize()}\n\n"
-        f"Теперь у тебя {user_data[user_id]['collection'][chosen_flavor]} шт. этого вкуса",
+        f"🎉 {rarity_messages[chosen_rarity]} You got:\n"
+        f"{flavor_data['emoji']} <b>{chosen_flavor.capitalize()}</b> ice cream !\n"
+        f"Rarity: {chosen_rarity.capitalize()}\n\n"
+        f"Now you have {user_data[user_id]['collection'][chosen_flavor]} pc. of this taste",
         parse_mode="HTML"
     )
 
@@ -152,8 +153,8 @@ async def show_collection(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     
     if not collection:
         await update.message.reply_text(
-            "❌ Твоя коллекция пуста!\n"
-            "Попробуй получить первое мороженое через команду /ice_cream",
+            "❌ Your collection is empty!\n"
+            "Try to get your first ice cream through command /ice_cream",
             reply_markup=main_keyboard
         )
         return
@@ -171,7 +172,7 @@ async def show_collection(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                            key=lambda x: list(RARITY_WEIGHTS.keys()).index(x[0]))
     
     # Формируем сообщение
-    message = ["<b>🍨 Твоя коллекция мороженого:</b>\n"]
+    message = ["<b>🍨 Your ice cream collection:</b>\n"]
     
     for rarity, flavors in sorted_rarities:
         message.append(f"\n<b>{rarity.capitalize()}:</b>")
@@ -184,17 +185,17 @@ async def show_collection(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     unique_flavors = len(collection)
     percentage = (unique_flavors / len(FLAVORS)) * 100
     
-    message.append(f"\n\n<b>📊 Статистика:</b>")
-    message.append(f"Всего мороженого: {total_flavors}")
-    message.append(f"Уникальных вкусов: {unique_flavors} из {len(FLAVORS)} ({percentage:.1f}%)")
+    message.append(f"\n\n<b>📊 Statistic:</b>")
+    message.append(f"All ice cream: {total_flavors}")
+    message.append(f"Unique flavors: {unique_flavors} из {len(FLAVORS)} ({percentage:.1f}%)")
     
     # Прогресс бар коллекции
     progress = int((unique_flavors / len(FLAVORS)) * 20)
     message.append("\n" + "🟩" * progress + "⬜" * (20 - progress))
     
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("🔄 Проверить дроп", callback_data="check_drop")],
-        [InlineKeyboardButton("🍦 Добавить в статистику", callback_data="add_to_stats")]
+        [InlineKeyboardButton("🔄 Check the drop", callback_data="check_drop")],
+        [InlineKeyboardButton("🍦 Add to statistic", callback_data="add_to_stats")]
     ])
     
     await update.message.reply_text(
@@ -213,35 +214,33 @@ async def profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     ice_cream_chart = generate_ice_cream_chart(user_data[user_id])
     
     profile_text = f"""
-<b>👤 Персональная информация:</b>
+<b>👤 Personal information:</b>
 
-<u>Основные данные:</u>
-• Имя: Алексей Петров
-• Возраст: 28 лет
-• Локация: Москва, Россия
-• Должность: Full-stack разработчик
+<u>Basic data:</u>
+• name: di9star
+• age: 16 years old
+• location: Belarus, Minsk
 
-<u>Навыки:</u>
-🐍 Python (Django, Flask, FastAPI)
+<u>Skills:</u>
+🐍 Python (Django, Flask, Pygame)
 🌐 JavaScript (React, Node.js)
-📱 Мобильная разработка (Kivy)
-🤖 Чат-боты (Telegram, Discord)
-☁️ Облачные технологии (AWS, Docker)
+📱 Frontend/Beckend (HTML, CSS, JavaScript)
+🤖 Bots (Telegram, Discord)
 
-<u>Статистика мороженого:</u>
-🍦 Всего съедено: <b>{total_ice_cream}</b> порций
-🎨 Уникальных вкусов: <b>{unique_flavors}</b> из {len(FLAVORS)}
+<u>Ice cream statistic:</u>
+🍦 Has been eaten in total : <b>{total_ice_cream}</b> порций
+🎨 Unque flavors: <b>{unique_flavors}</b> из {len(FLAVORS)}
 {ice_cream_chart}
 
-<u>Образование:</u>
-🎓 МГТУ им. Баумана
-📅 2013-2019
-💻 Компьютерные науки
+<u>Education:</u>
+🎓 secondary education
+📅 algoritmika courses
+💻 college MRK
 
-<u>Опыт работы:</u>
-• Senior Developer в Яндекс (2020-н.в.)
-• Middle Developer в Mail.ru (2018-2020)
-• Junior Developer в СберТех (2016-2018)
+<u>Work experience:</u>
+• Special websait for college
+• Some websaits for games
+• Some bots 
 """
 
     photo_url = "https://via.placeholder.com/400x300?text=Developer+Photo"
@@ -261,7 +260,7 @@ async def profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 def generate_ice_cream_chart(user_data):
     """Генерация графика потребления мороженого."""
     if not user_data["flavors"]:
-        return "📊 Еще нет данных о вкусах"
+        return "📊No taste data yet"
     
     total = sum(user_data["flavors"].values())
     chart = []
@@ -278,22 +277,22 @@ def generate_ice_cream_chart(user_data):
     return "\n".join(chart)
 
 async def social_media(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Социальные сети."""
+    """Social media."""
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("📂 GitHub", url="https://github.com")],
-        [InlineKeyboardButton("💼 LinkedIn", url="https://linkedin.com")],
-        [InlineKeyboardButton("📱 Telegram", url="https://t.me")],
-        [InlineKeyboardButton("🐦 Twitter", url="https://twitter.com")],
+        [InlineKeyboardButton("📂 GitHub", url="https://github.com/nastuh")],
+        [InlineKeyboardButton("💼 Instagram", url="https://linkedin.com")],
+        [InlineKeyboardButton("📱 Telegram", url="https://t.me/@di9star")],
+        [InlineKeyboardButton("🐦 FicBook", url="https://ficbook.net/authors/018d176f-55e9-7fbd-952d-b22e3583a0ab")],
     ])
     await update.message.reply_text(
-        "🔗 Мои социальные сети:",
+        "🔗 My social media:",
         reply_markup=keyboard
     )
 
 async def projects(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Проекты с ссылками на GitHub."""
+    """Projects with links on GitHub."""
     projects_text = """
-<b>📂 Мои проекты:</b>
+<b>📂 My projects:</b>
 
 1. <b>Telegram Бот для учета финансов</b>
    - Python, aiogram, PostgreSQL
@@ -313,7 +312,7 @@ async def projects(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 """
     
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("⭐ Все проекты на GitHub", url="https://github.com")],
+        [InlineKeyboardButton("⭐ All projects", url="https://github.com/nastuh")],
     ])
     
     await update.message.reply_text(
@@ -336,23 +335,23 @@ async def ice_cream_counter(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("🍫 Шоколад", callback_data="flavor_chocolate"),
-            InlineKeyboardButton("⚪ Ваниль", callback_data="flavor_vanilla"),
+            InlineKeyboardButton("🍫 chocolate", callback_data="flavor_chocolate"),
+            InlineKeyboardButton("⚪ vanilla", callback_data="flavor_vanilla"),
         ],
         [
-            InlineKeyboardButton("🍓 Клубника", callback_data="flavor_strawberry"),
-            InlineKeyboardButton("🟢 Мята", callback_data="flavor_mint"),
+            InlineKeyboardButton("🍓 strawberry", callback_data="flavor_strawberry"),
+            InlineKeyboardButton("🟢 mint", callback_data="flavor_mint"),
         ],
         [
-            InlineKeyboardButton("🟤 Карамель", callback_data="flavor_caramel"),
-            InlineKeyboardButton("🔵 Голубика", callback_data="flavor_blueberry"),
+            InlineKeyboardButton("🟤 caramel", callback_data="flavor_caramel"),
+            InlineKeyboardButton("🔵 blueberry", callback_data="flavor_blueberry"),
         ],
-        [InlineKeyboardButton("📊 Подробная статистика", callback_data="show_stats")],
-        [InlineKeyboardButton("🔄 Сбросить счетчик", callback_data="reset_counter")],
+        [InlineKeyboardButton("📊 Stats", callback_data="show_stats")],
+        [InlineKeyboardButton("🔄 Rest counter", callback_data="reset_counter")],
     ])
     
     await update.message.reply_text(
-        f"🍦 Счетчик мороженого\n\n{stats_text}",
+        f"🍦 Ice cream counter\n\n{stats_text}",
         reply_markup=keyboard,
         parse_mode="HTML"
     )
@@ -367,17 +366,17 @@ def generate_ice_cream_stats(user_data):
     
     # Красивая таблица с псевдографикой
     table = [
-        "<b>📊 Статистика потребления мороженого</b>",
+        "<b>📊 Statistic </b>",
         "",
         "┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓",
-        f"┃ {'Показатель':<18} ┃ {'Значение':>7} ┃",
+        f"┃ {'Indicator':<18} ┃ {' Value':>7} ┃",
         "┣━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━┫",
-        f"┃ {'Сегодня':<18} ┃ {today_count:>7} ┃",
-        f"┃ {'За неделю':<18} ┃ {week_count:>7} ┃",
-        f"┃ {'Всего':<18} ┃ {total:>7} ┃",
+        f"┃ {'today':<18} ┃ {today_count:>7} ┃",
+        f"┃ {'this week':<18} ┃ {week_count:>7} ┃",
+        f"┃ {'all':<18} ┃ {total:>7} ┃",
         "┗━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━┛",
         "",
-        "<b>🍨 Популярные вкусы:</b>"
+        "<b>🍨 Popular flavors:</b>"
     ]
     
     # Топ-3 вкуса
@@ -385,9 +384,9 @@ def generate_ice_cream_stats(user_data):
         top_flavors = sorted(user_data["flavors"].items(), key=lambda x: x[1], reverse=True)[:3]
         for i, (flavor, count) in enumerate(top_flavors, 1):
             emoji = FLAVORS.get(flavor, {}).get("emoji", "🍦")
-            table.append(f"{i}. {emoji} {flavor.capitalize()}: {count} порций")
+            table.append(f"{i}. {emoji} {flavor.capitalize()}: {count} servings")
     else:
-        table.append("Еще нет данных о вкусах")
+        table.append("No taste data yet")
     
     return "\n".join(table)
 
@@ -409,11 +408,11 @@ def generate_detailed_stats(user_data):
     
     # Формируем сообщение
     message = [
-        "<b>🍦 Детальная статистика</b>",
+        "<b>🍦 Detail statistic</b>",
         "",
-        "<b>📅 По дням:</b>",
+        "<b>📅 By day:</b>",
         "┏━━━━━━━━━━━━━━┳━━━━━━━━━┓",
-        "┃ Дата         ┃ Порций  ┃",
+        "┃ data         ┃servings ┃",
         "┣━━━━━━━━━━━━━━╋━━━━━━━━━┫"
     ]
     
@@ -423,9 +422,9 @@ def generate_detailed_stats(user_data):
     message.extend([
         "┗━━━━━━━━━━━━━━┻━━━━━━━━━┛",
         "",
-        "<b>🍨 По вкусам:</b>",
+        "<b>🍨 By flavors:</b>",
         "┏━━━━━━━━━━━━━━┳━━━━━━━━━┓",
-        "┃ Вкус         ┃ Порций  ┃",
+        "┃ flavor       ┃servings ┃",
         "┣━━━━━━━━━━━━━━╋━━━━━━━━━┫"
     ])
     
@@ -462,15 +461,15 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
             "flavor": flavor
         })
         
-        await query.answer(f"{emoji} +1 {flavor} мороженое! Сегодня: {user_data[user_id]['dates'][today]}")
+        await query.answer(f"{emoji} +1 {flavor} ice cream! Today: {user_data[user_id]['dates'][today]}")
     
     elif data == "show_stats":
         detailed_stats = generate_detailed_stats(user_data[user_id])
         await query.answer()
         await query.edit_message_text(
-            text=f"🍦 Детальная статистика\n\n{detailed_stats}",
+            text=f"🍦 Detail statistic\n\n{detailed_stats}",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔙 Назад", callback_data="back_to_main")],
+                [InlineKeyboardButton("🔙 back", callback_data="back_to_main")],
             ]),
             parse_mode="HTML"
         )
@@ -482,28 +481,28 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         user_data[user_id]["dates"] = defaultdict(int)
         user_data[user_id]["flavors"] = defaultdict(int)
         user_data[user_id]["dates"][today] = 0
-        await query.answer("Счетчик сброшен!")
+        await query.answer("Counter reset!")
     
     elif data == "back_to_main":
         stats_text = generate_ice_cream_stats(user_data[user_id])
         keyboard = InlineKeyboardMarkup([
             [
-                InlineKeyboardButton("🍫 Шоколад", callback_data="flavor_chocolate"),
-                InlineKeyboardButton("⚪ Ваниль", callback_data="flavor_vanilla"),
+                InlineKeyboardButton("🍫 chocolate", callback_data="flavor_chocolate"),
+                InlineKeyboardButton("⚪ vanilla", callback_data="flavor_vanilla"),
             ],
             [
-                InlineKeyboardButton("🍓 Клубника", callback_data="flavor_strawberry"),
-                InlineKeyboardButton("🟢 Мята", callback_data="flavor_mint"),
+                InlineKeyboardButton("🍓 strawberry", callback_data="flavor_strawberry"),
+                InlineKeyboardButton("🟢 mint", callback_data="flavor_mint"),
             ],
             [
-                InlineKeyboardButton("🟤 Карамель", callback_data="flavor_caramel"),
-                InlineKeyboardButton("🔵 Голубика", callback_data="flavor_blueberry"),
+                InlineKeyboardButton("🟤 caramel", callback_data="flavor_caramel"),
+                InlineKeyboardButton("🔵 blueberry", callback_data="flavor_blueberry"),
             ],
-            [InlineKeyboardButton("📊 Подробная статистика", callback_data="show_stats")],
-            [InlineKeyboardButton("🔄 Сбросить счетчик", callback_data="reset_counter")],
+            [InlineKeyboardButton("📊 Stats", callback_data="show_stats")],
+            [InlineKeyboardButton("🔄 Reset counter", callback_data="reset_counter")],
         ])
         await query.edit_message_text(
-            text=f"🍦 Счетчик мороженого\n\n{stats_text}",
+            text=f"🍦 Ice cream counter\n\n{stats_text}",
             reply_markup=keyboard,
             parse_mode="HTML"
         )
@@ -523,49 +522,50 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
                 "count": 1,
                 "flavor": last_flavor
             })
-            await query.answer(f"🍦 {last_flavor.capitalize()} добавлено в статистику!")
+            await query.answer(f"🍦 {last_flavor.capitalize()} add to statistic!")
         else:
-            await query.answer("У вас нет мороженого в коллекции!")
+            await query.answer("You don't have ice cream in your collection")
         return
     
     # Обновляем сообщение
     stats_text = generate_ice_cream_stats(user_data[user_id])
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("🍫 Шоколад", callback_data="flavor_chocolate"),
-            InlineKeyboardButton("⚪ Ваниль", callback_data="flavor_vanilla"),
+            InlineKeyboardButton("🍫 chocolate", callback_data="flavor_chocolate"),
+            InlineKeyboardButton("⚪ vanilla", callback_data="flavor_vanilla"),
         ],
         [
-            InlineKeyboardButton("🍓 Клубника", callback_data="flavor_strawberry"),
-            InlineKeyboardButton("🟢 Мята", callback_data="flavor_mint"),
+            InlineKeyboardButton("🍓 strawberry", callback_data="flavor_strawberry"),
+            InlineKeyboardButton("🟢 mint", callback_data="flavor_mint"),
         ],
         [
-            InlineKeyboardButton("🟤 Карамель", callback_data="flavor_caramel"),
-            InlineKeyboardButton("🔵 Голубика", callback_data="flavor_blueberry"),
+            InlineKeyboardButton("🟤 caramel", callback_data="flavor_caramel"),
+            InlineKeyboardButton("🔵 blueberry", callback_data="flavor_blueberry"),
         ],
-        [InlineKeyboardButton("📊 Подробная статистика", callback_data="show_stats")],
-        [InlineKeyboardButton("🔄 Сбросить счетчик", callback_data="reset_counter")],
+        [InlineKeyboardButton("📊 Stats", callback_data="show_stats")],
+        [InlineKeyboardButton("🔄 Reset counter", callback_data="reset_counter")],
     ])
     await query.edit_message_text(
-        text=f"🍦 Счетчик мороженого\n\n{stats_text}",
+        text=f"🍦 Ice cream counter\n\n{stats_text}",
         reply_markup=keyboard,
         parse_mode="HTML"
     )
 
 async def show_commands(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Список команд."""
+    """List of commands."""
     text = """
-<b>📋 Доступные команды:</b>
+<b>📋 Available commands:</b>
 
-/start - Начать работу с ботом
-/profile - Показать мой профиль
-/social - Мои социальные сети
-/projects - Мои проекты с ссылками
-/ice_cream - Счетчик мороженого
-/collection - Моя коллекция мороженого
-/commands - Показать все команды
+/start - Start working with the bot
+/profile - Show my profile
+/social - My social networks
+/projects - My projects with links
+/ice_cream - Ice cream counter
+/collection - My ice cream collection
+/commands - Show all commands
 
-<i>Вы также можете использовать кнопки меню</i>
+
+<i>You can also use the menu buttons.</i>
 """
     await update.message.reply_text(text, parse_mode="HTML")
 
@@ -583,12 +583,12 @@ def main() -> None:
     application.add_handler(CommandHandler("commands", show_commands))
 
     # Обработчики сообщений (кнопки)
-    application.add_handler(MessageHandler(filters.Text(["👤 Профиль"]), profile))
-    application.add_handler(MessageHandler(filters.Text(["🌐 Соцсети"]), social_media))
-    application.add_handler(MessageHandler(filters.Text(["📂 Проекты"]), projects))
-    application.add_handler(MessageHandler(filters.Text(["🍦 Счетчик мороженого"]), ice_cream_counter))
-    application.add_handler(MessageHandler(filters.Text(["🎁 Коллекция"]), show_collection))
-    application.add_handler(MessageHandler(filters.Text(["📋 Команды"]), show_commands))
+    application.add_handler(MessageHandler(filters.Text(["👤 Profile"]), profile))
+    application.add_handler(MessageHandler(filters.Text(["🌐 Social media"]), social_media))
+    application.add_handler(MessageHandler(filters.Text(["📂 Projects"]), projects))
+    application.add_handler(MessageHandler(filters.Text(["🍦 Ice cream counter"]), ice_cream_counter))
+    application.add_handler(MessageHandler(filters.Text(["🎁 Collection"]), show_collection))
+    application.add_handler(MessageHandler(filters.Text(["📋 Commands"]), show_commands))
 
     # Обработчик inline-кнопок
     application.add_handler(CallbackQueryHandler(button_click))
