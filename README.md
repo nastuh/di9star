@@ -1,3 +1,3 @@
 # di9star
 
-my portfolio sait
+my portfolio bot telegram
