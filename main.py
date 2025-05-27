@@ -571,7 +571,7 @@ async def show_commands(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 def main() -> None:
     """Запуск бота."""
-    application = Application.builder().token("7229958377:AAHBaIbaHo7sHhudrtZDbHgBpiZCTUzTnkI").build()
+    application = Application.builder().token("your_bot_token").build()
 
     # Обработчики команд
     application.add_handler(CommandHandler("start", start))
