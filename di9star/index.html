@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolioOS | cat-powered terminal</title>
+    
+
+    <link rel="stylesheet" href="style.css">
+    
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <span class="ascii-art">┌──(portfolio㉿kali)-[~]</span>
+            </div>
+            <div class="terminal-controls">
+                <span class="control minimize">─</span>
+                <span class="control maximize">□</span>
+                <span class="control close">✕</span>
+            </div>
+        </div>
+
+
+        <div class="terminal-body">
+
+            <div class="kitty-section">
+                <pre class="kitty-ascii" id="kitty">
+    /\_/\
+   ( o.o )
+    > ^ <
+                </pre>
+                <div class="kitty-status">
+                    <span class="status-blink">●</span> system cat: online
+                </div>
+            </div>
+
+
+            <div class="widget-grid">
+                <div class="widget time-widget">
+                    <span class="widget-label">⏰ TIME</span>
+                    <span class="widget-value" id="current-time">--:--:--</span>
+                </div>
+                <div class="widget date-widget">
+                    <span class="widget-label">📅 DATE</span>
+                    <span class="widget-value" id="current-date">--- -- ----</span>
+                </div>
+                <div class="widget location-widget">
+                    <span class="widget-label">📍 LOCATION</span>
+                    <span class="widget-value" id="user-location">detecting...</span>
+                </div>
+                <div class="widget weather-widget">
+                    <span class="widget-label">🌤️ WEATHER</span>
+                    <span class="widget-value" id="weather">loading...</span>
+                </div>
+            </div>
+
+
+            <div class="boot-sequence">
+                <p><span class="prompt">$</span> systemctl start portfolio.service</p>
+                <p class="success">[  OK  ] Loaded portfolio kernel modules</p>
+                <p><span class="prompt">$</span> cat /var/kitty/status</p>
+                <p class="success">[  OK  ] Kitty daemon is running 🐱</p>
+            </div>
+
+
+            <div class="parent">
+
+                <div class="div1" data-project="1" data-type="experience">
+                    <h2>>_ 01</h2>
+                    <span class="project-type">experience.log</span>
+                    <span class="project-desc">5+ years in web dev</span>
+                    <div class="project-details hidden">
+                        • Senior Frontend Dev @ TechCorp (2022-now)<br>
+                        • Full Stack @ StartupX (2020-2022)<br>
+                        • Freelance (2018-2020)
+                    </div>
+                </div>
+                
+
+                <div class="div2" data-project="2" data-type="projects">
+                    <h2>>_ 02</h2>
+                    <span class="project-type">projects.list</span>
+                    <span class="project-desc">featured work</span>
+                    <div class="project-details hidden">
+                        • E-commerce platform (React/Node)<br>
+                        • Mobile banking app (React Native)<br>
+                        • PortfolioOS (you're here!)
+                    </div>
+                </div>
+                
+
+                <div class="div3" data-project="3" data-type="skills">
+                    <h2>>_ 03</h2>
+                    <span class="project-type">skills.config</span>
+                    <span class="project-desc">tech stack</span>
+                    <div class="project-details hidden">
+                        • Frontend: React, Vue, Svelte<br>
+                        • Backend: Node, Python, Go<br>
+                        • DevOps: Docker, AWS, CI/CD
+                    </div>
+                </div>
+                
+
+                <div class="div4" data-project="4" data-type="education">
+                    <h2>>_ 04</h2>
+                    <span class="project-type">education.txt</span>
+                    <span class="project-desc">academic background</span>
+                    <div class="project-details hidden">
+                        • MS Computer Science @ Stanford<br>
+                        • BS Software Engineering @ MIT<br>
+                        • Certifications: AWS, GCP
+                    </div>
+                </div>
+                
+
+                <div class="div5" data-project="5" data-type="certifications">
+                    <h2>>_ 05</h2>
+                    <span class="project-type">certs.pem</span>
+                    <span class="project-desc">certificates</span>
+                    <div class="project-details hidden">
+                        • AWS Solutions Architect<br>
+                        • Google Cloud Professional<br>
+                        • Meta Frontend Developer
+                    </div>
+                </div>
+                
+
+                <div class="div6" data-project="6" data-type="blog">
+                    <h2>>_ 06</h2>
+                    <span class="project-type">blog.posts</span>
+                    <span class="project-desc">latest writings</span>
+                    <div class="project-details hidden">
+                        • "Building PortfolioOS"<br>
+                        • "Cat-driven Development"<br>
+                        • "Terminal Aesthetics in 2024"
+                    </div>
+                </div>
+                
+
+                <div class="div7" data-project="7" data-type="contact">
+                    <h2>>_ 07</h2>
+                    <span class="project-type">contact.vcf</span>
+                    <span class="project-desc">get in touch</span>
+                    <div class="project-details hidden">
+                        • GitHub: @portfolio-cat<br>
+                        • LinkedIn: /in/portfolio-os<br>
+                        • Email: cat@portfolio.os
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="interactive-terminal">
+                <div class="terminal-output" id="terminal-output">
+                    <p><span class="prompt">$</span> Welcome to portfolioOS v2024.1</p>
+                    <p><span class="prompt">$</span> Type 'help' for available commands</p>
+                    <p><span class="prompt">$</span> Try saying 'hi' to the cat! 🐱</p>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt">portfolio@kali:~$</span>
+                    <input type="text" class="terminal-input" id="terminal-input" placeholder="type command..." autofocus>
+                </div>
+            </div>
+
+
+            <div class="terminal-footer">
+                <div class="status-line">
+                    <span class="status-item">───╼ [7 modules loaded]</span>
+                    <span class="status-item">╼ [kitty: 😺]</span>
+                    <span class="status-item">╼ [system: online]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

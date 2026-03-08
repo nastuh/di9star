@@ -1,0 +1,308 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+
+  --bg-primary: #0a0e12;
+  --bg-secondary: #141b1f;
+  --bg-terminal: #1e1e1e;
+  --bg-header: #2d2d2d;
+  --text-primary: #c7c7c7;
+  --text-secondary: #8a8a8a;
+  --text-green: #98c379;
+  --text-blue: #61afef;
+  --text-purple: #c678dd;
+  --text-yellow: #e5c07b;
+  --text-red: #e06c75;
+  --border-color: #3e4451;
+  --success: #98c379;
+  --error: #e06c75;
+  --warning: #e5c07b;
+  
+
+  --grid-1: #282c34;
+  --grid-2: #2c313a;
+  --grid-3: #313640;
+  --grid-4: #353b46;
+  --grid-5: #3a404c;
+  --grid-6: #3e4552;
+  --grid-7: #434a58;
+}
+
+body {
+  font-family: 'Fira Code', 'Monaco', 'Menlo', monospace;
+  background: var(--bg-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+
+.terminal-container {
+  width: 100%;
+  max-width: 1100px; 
+  background: var(--bg-terminal);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+}
+
+
+.terminal-header {
+  background: var(--bg-header);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-title {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+
+.kitty-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: rgba(152, 195, 121, 0.05);
+  border-radius: 6px;
+  border: 1px dashed var(--text-green);
+}
+
+.kitty-ascii {
+  color: var(--text-yellow);
+  font-size: 10px;
+  line-height: 1.2;
+  text-shadow: 0 0 5px rgba(229, 192, 123, 0.3);
+  animation: kitty-bounce 2s infinite ease-in-out;
+}
+
+@keyframes kitty-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.kitty-status {
+  color: var(--text-green);
+  font-size: 11px;
+}
+
+.status-blink {
+  animation: blink 1s infinite;
+  color: var(--text-green);
+  margin-right: 4px;
+}
+
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.widget {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-label {
+  font-size: 9px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.widget-value {
+  font-size: 11px;
+  color: var(--text-green);
+  font-weight: 600;
+}
+
+
+.boot-sequence {
+  margin-bottom: 15px;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 6px;
+  margin: 15px 0;
+  min-height: 300px;
+}
+
+.parent > div {
+  background: var(--grid-1);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Fira Code', monospace;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-size: 11px;
+}
+
+.parent > div:hover {
+  border-color: var(--text-green);
+  box-shadow: 0 0 10px rgba(152, 195, 121, 0.2);
+  transform: translateY(-1px);
+}
+
+.parent > div h2 {
+  font-size: 11px;
+  color: var(--text-green);
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.project-type {
+  font-size: 9px;
+  color: var(--text-blue);
+  margin-bottom: 2px;
+}
+
+.project-desc {
+  font-size: 8px;
+  color: var(--text-secondary);
+}
+
+.project-details {
+  font-size: 8px;
+  color: var(--text-yellow);
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--border-color);
+  line-height: 1.3;
+}
+
+.project-details.hidden {
+  display: none;
+}
+
+
+.div1 { grid-column: 1; grid-row: 1; }
+.div2 { grid-column: span 2 / span 2; grid-row: span 3 / span 3; grid-column-start: 4; grid-row-start: 1; }
+.div3 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 4; grid-row-start: 4; }
+.div4 { grid-column-start: 2; grid-row-start: 1; }
+.div5 { grid-row: span 5 / span 5; grid-column-start: 3; grid-row-start: 1; }
+.div6 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 1; grid-row-start: 2; }
+.div7 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 1; grid-row-start: 4; }
+
+
+.interactive-terminal {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.terminal-output {
+  padding: 8px;
+  min-height: 60px;
+  max-height: 100px;
+  overflow-y: auto;
+  font-size: 11px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-output p {
+  margin: 2px 0;
+  color: var(--text-secondary);
+}
+
+.terminal-input-line {
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  color: var(--text-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  flex: 1;
+  outline: none;
+}
+
+.terminal-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+
+.terminal-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color);
+}
+
+.status-line {
+  display: flex;
+  gap: 15px;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+
+@media (max-width: 768px) {
+  .widget-grid {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .parent {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+  }
+  
+  .parent > div {
+      grid-column: auto !important;
+      grid-row: auto !important;
+  }
+  
+  .kitty-section {
+      flex-direction: column;
+      text-align: center;
+  }
+}
