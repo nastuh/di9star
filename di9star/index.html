@@ -3,182 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>di9starOS | personal terminal portfolio</title>
+    <title>nastuhOs | terminal grid</title>
     
-
+ 
     <link rel="stylesheet" href="style.css">
     
 
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="terminal-container">
-
-        <div class="terminal-header">
-            <div class="terminal-title">
-                <span class="ascii-art">┌──(di9star㉿kali)-[~]</span>
-            </div>
-            <div class="terminal-controls">
-                <span class="control minimize">─</span>
-                <span class="control maximize">□</span>
-                <span class="control close">✕</span>
-            </div>
-        </div>
-
-
-        <div class="terminal-body">
-
+    <div class="container">
+    
+        <div class="top-bar">
             <div class="kitty-section">
                 <pre class="kitty-ascii" id="kitty">
     /\_/\
    ( o.o )
     > ^ <
-
+   #di9star
                 </pre>
+                <div class="kitty-status">
+                    <span class="status-blink">●</span> nastuh's system cat
+                </div>
             </div>
 
-
-            <div class="widget-grid">
-                <div class="widget time-widget">
-                    <span class="widget-label">⏰ TIME</span>
+            <div class="widgets">
+                <div class="widget">
+                    <span class="widget-label">⏰</span>
                     <span class="widget-value" id="current-time">--:--:--</span>
                 </div>
-                <div class="widget date-widget">
-                    <span class="widget-label">📅 DATE</span>
+                <div class="widget">
+                    <span class="widget-label">📅</span>
                     <span class="widget-value" id="current-date">--- -- ----</span>
                 </div>
-                <div class="widget location-widget">
-                    <span class="widget-label">📍 LOCATION</span>
+                <div class="widget">
+                    <span class="widget-label">📍</span>
                     <span class="widget-value" id="user-location">detecting...</span>
                 </div>
-                <div class="widget weather-widget">
-                    <span class="widget-label">🌤️ WEATHER</span>
+                <div class="widget">
+                    <span class="widget-label">🌤️</span>
                     <span class="widget-value" id="weather">loading...</span>
                 </div>
             </div>
+        </div>
 
-
-            <div class="boot-sequence">
-                <p><span class="prompt">$</span> systemctl start di9star.service</p>
-                <p class="success">[  OK  ] Loaded di9star kernel modules</p>
-                <p><span class="prompt">$</span> cat /var/kitty/status</p>
-                <p class="success">[  OK  ] di9star's kitty daemon is running 🐱</p>
-            </div>
-
-
-            <div class="parent">
-
-                <div class="div1" data-project="1" data-type="experience">
-                    <h2>>_ 01</h2>
-                    <span class="project-type">experience.log</span>
-                    <span class="project-desc">5+ years in web dev</span>
-                    <div class="project-details hidden">
-                        • Senior Frontend Dev @ TechCorp (2022-now)<br>
-                        • Full Stack @ StartupX (2020-2022)<br>
-                        • Freelance (2018-2020)
-                    </div>
+        <div class="parent">
+           
+            <div class="div1" data-project="1">
+                <div class="block-header">
+                    <span class="block-number">01</span>
+                    <span class="block-type">experience.log</span>
                 </div>
-                
-
-                <div class="div2" data-project="2" data-type="projects">
-                    <h2>>_ 02</h2>
-                    <span class="project-type">projects.list</span>
-                    <span class="project-desc">featured work</span>
-                    <div class="project-details hidden">
-                        • E-commerce platform (React/Node)<br>
-                        • Mobile banking app (React Native)<br>
-                        • nastuhOS (you're here!)
+                <div class="block-content">
+                    <div class="block-item">
+                        <span class="item-year">2022-now</span>
+                        <span class="item-title">Senior Frontend Dev @ TechCorp</span>
                     </div>
-                </div>
-                
-
-                <div class="div3" data-project="3" data-type="skills">
-                    <h2>>_ 03</h2>
-                    <span class="project-type">skills.config</span>
-                    <span class="project-desc">tech stack</span>
-                    <div class="project-details hidden">
-                        • Frontend: React, Vue, Svelte<br>
-                        • Backend: Node, Python, Go<br>
-                        • DevOps: Docker, AWS, CI/CD
+                    <div class="block-item">
+                        <span class="item-year">2020-2022</span>
+                        <span class="item-title">Full Stack @ StartupX</span>
                     </div>
-                </div>
-                
-
-                <div class="div4" data-project="4" data-type="education">
-                    <h2>>_ 04</h2>
-                    <span class="project-type">education.txt</span>
-                    <span class="project-desc">academic background</span>
-                    <div class="project-details hidden">
-                        • MS Computer Science @ Stanford<br>
-                        • BS Software Engineering @ MIT<br>
-                        • Certifications: AWS, GCP
-                    </div>
-                </div>
-                
-
-                <div class="div5" data-project="5" data-type="certifications">
-                    <h2>>_ 05</h2>
-                    <span class="project-type">certs.pem</span>
-                    <span class="project-desc">certificates</span>
-                    <div class="project-details hidden">
-                        • AWS Solutions Architect<br>
-                        • Google Cloud Professional<br>
-                        • Meta Frontend Developer
-                    </div>
-                </div>
-                
-
-                <div class="div6" data-project="6" data-type="blog">
-                    <h2>>_ 06</h2>
-                    <span class="project-type">blog.posts</span>
-                    <span class="project-desc">latest writings</span>
-                    <div class="project-details hidden">
-                        • "Building di9starOS"<br>
-                        • "Cat-driven Development"<br>
-                        • "Terminal Aesthetics in 2024"
-                    </div>
-                </div>
-                
-
-                <div class="div7" data-project="7" data-type="pcspecs">
-                    <h2>>_ 07</h2>
-                    <span class="project-type">pc_specs.conf</span>
-                    <span class="project-desc">di9star's rig</span>
-                    <div class="project-details hidden">
-                        • CPU: AMD Ryzen 9 7950X<br>
-                        • GPU: NVIDIA RTX 4090 24GB<br>
-                        • RAM: 16GB DDR5 6000MHz<br>
-                        • STORAGE: 2TB NVMe + 4TB HDD<br>
-                        • OS: Arch Linux + Windows 11 + MacOs
+                    <div class="block-item">
+                        <span class="item-year">2018-2020</span>
+                        <span class="item-title">Freelance Developer</span>
                     </div>
                 </div>
             </div>
-
-
-            <div class="interactive-terminal">
-                <div class="terminal-output" id="terminal-output">
-                    <p><span class="prompt">$</span> Welcome to di9starOS v2024.1</p>
-                    <p><span class="prompt">$</span> Type 'help' for available commands</p>
-                    <p><span class="prompt">$</span> Try saying 'hi' to di9star's cat! 🐱</p>
+            
+           
+            <div class="div2" data-project="2">
+                <div class="block-header">
+                    <span class="block-number">02</span>
+                    <span class="block-type">projects.list</span>
                 </div>
-                <div class="terminal-input-line">
-                    <span class="prompt">di9star@kali:~$</span>
-                    <input type="text" class="terminal-input" id="terminal-input" placeholder="type command..." autofocus>
+                <div class="block-content">
+                    <div class="block-item">
+                        <span class="item-icon">🛒</span>
+                        <span class="item-title">E-commerce Platform</span>
+                        <span class="item-tech">React/Node</span>
+                    </div>
+                    <div class="block-item">
+                        <span class="item-icon">📱</span>
+                        <span class="item-title">Mobile Banking App</span>
+                        <span class="item-tech">React Native</span>
+                    </div>
+                    <div class="block-item">
+                        <span class="item-icon">🖥️</span>
+                        <span class="item-title">di9starOS</span>
+                        <span class="item-tech">You're here!</span>
+                    </div>
                 </div>
             </div>
-
-
-            <div class="terminal-footer">
-                <div class="status-line">
-                    <span class="status-item">──[7 modules loaded]</span>
-                    <span class="status-item">╼ [di9star's kitty: 😺]</span>
-                    <span class="status-item">╼ [system: online]</span>
+            
+            
+            <div class="div3" data-project="3">
+                <div class="block-header">
+                    <span class="block-number">03</span>
+                    <span class="block-type">skills.config</span>
+                </div>
+                <div class="block-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vue</span>
+                        <span class="skill-tag">Svelte</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+            
+           
+            <div class="div4" data-project="4">
+                <div class="block-header">
+                    <span class="block-number">04</span>
+                    <span class="block-type">education.txt</span>
+                </div>
+                <div class="block-content">
+                    <div class="block-item">
+                        <span class="item-degree">🎓 MS Computer Science</span>
+                        <span class="item-school">Stanford University</span>
+                    </div>
+                    <div class="block-item">
+                        <span class="item-degree">📚 BS Software Engineering</span>
+                        <span class="item-school">MIT</span>
+                    </div>
+                    <div class="block-item">
+                        <span class="item-degree">📜 Certifications</span>
+                        <span class="item-school">AWS, GCP, Meta</span>
+                    </div>
+                </div>
+            </div>
+            
+           
+            <div class="div5" data-project="5">
+                <div class="block-header">
+                    <span class="block-number">05</span>
+                    <span class="block-type">certs.pem</span>
+                </div>
+                <div class="block-content">
+                    <div class="cert-item">
+                        <span class="cert-badge">✓</span>
+                        AWS Solutions Architect
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-badge">✓</span>
+                        Google Cloud Professional
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-badge">✓</span>
+                        Meta Frontend Developer
+                    </div>
+                    <div class="cert-item">
+                        <span class="cert-badge">✓</span>
+                        Kubernetes Administrator
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="div6" data-project="6">
+                <div class="block-header">
+                    <span class="block-number">06</span>
+                    <span class="block-type">blog.posts</span>
+                </div>
+                <div class="block-content">
+                    <div class="blog-post">
+                        <span class="post-date">2024-03</span>
+                        <span class="post-title">Building di9starOS</span>
+                    </div>
+                    <div class="blog-post">
+                        <span class="post-date">2024-02</span>
+                        <span class="post-title">Cat-driven Development</span>
+                    </div>
+                    <div class="blog-post">
+                        <span class="post-date">2024-01</span>
+                        <span class="post-title">Terminal Aesthetics</span>
+                    </div>
+                    <div class="blog-post">
+                        <span class="post-date">2023-12</span>
+                        <span class="post-title">Year in Review</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="div7" data-project="7">
+                <div class="block-header">
+                    <span class="block-number">07</span>
+                    <span class="block-type">pc_specs + terminal</span>
+                </div>
+                <div class="block-content split-content">
+                    <div class="specs-section">
+                        <div class="spec-item">
+                            <span class="spec-label">CPU:</span>
+                            <span class="spec-value">AMD Ryzen 9 7950X</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">GPU:</span>
+                            <span class="spec-value">RTX 4090 24GB</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">RAM:</span>
+                            <span class="spec-value">64GB DDR5 6000MHz</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">STORAGE:</span>
+                            <span class="spec-value">2TB NVMe + 4TB HDD</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">OS:</span>
+                            <span class="spec-value">Arch + Win11</span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="mini-terminal">
+                        <div class="mini-terminal-output" id="mini-terminal-output">
+                            <p>> nastuhOs terminal ready</p>
+                            <p>> Type 'help' for commands</p>
+                        </div>
+                        <div class="mini-terminal-input-line">
+                            <span class="mini-prompt">$</span>
+                            <input type="text" class="mini-terminal-input" id="mini-terminal-input" placeholder="enter command...">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+       
+        <div class="bottom-bar">
+            <span class="status-item">───╼ [7 modules loaded]</span>
+            <span class="status-item">╼ [nastuh's kitty: 😺]</span>
+            <span class="status-item">╼ [system: online]</span>
+            <span class="status-item">╼ [click blocks to explore]</span>
+        </div>
     </div>
 
-
+    
     <script src="script.js"></script>
 </body>
 </html>
